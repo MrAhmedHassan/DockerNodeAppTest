@@ -1,0 +1,21 @@
+# Docker Compose file for Express Node.js application
+services:
+  # Define the service for the Node.js application
+  node-app:
+    # Set the container name and specify the image to use
+    container_name: express-node-app-container
+    # Specify the image to use for the container, and build it from the current directory
+    image: express-node-app-image
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    volumes:
+      # Mount the source code directory as a read-only volume
+      - ./src:/app/src:ro
+    ports:
+      # Map port 3000 on the host to port 5000 in the container
+      - "3000:5000"
+    environment:
+      # Set environment variables for the application
+      - PORT=5000
+    env_file:
+      - ./.env

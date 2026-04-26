@@ -1,0 +1,26 @@
+# Use the official Node.js LTS image based on Alpine Linux for a smaller image size
+FROM node:lts-alpine3.22
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json to the container
+COPY package.json .
+
+ARG NODE_ENV
+
+RUN if [ "$NODE_ENV" = "production" ];  \
+        then npm install --only=production; \
+        else npm install; \
+    fi
+
+# Copy the rest of the application code to the container
+COPY . .
+
+# ENV PORT=8000
+
+# Expose the port that the application will run on (for documentation purposes, not strictly necessary for the application to run)
+EXPOSE ${PORT}
+
+# Start the application using the npm script defined in package.json
+# CMD ["npm", "run", "dev"]

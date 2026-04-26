@@ -1,0 +1,15 @@
+# Docker Compose file for Express Node.js application
+services:
+  # Define the service for the Node.js application
+  node-app:
+    build:
+      context: .
+      target: development
+
+    volumes:
+      # Mount the source code directory as a read-only volume
+      - ./src:/app/src:ro
+    environment:
+      # Set environment variables for the application
+      - NODE_ENV=development
+    command: npm run dev
