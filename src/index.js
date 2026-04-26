@@ -35,7 +35,7 @@ const redisPort = 6379;
 
 const redisClient = redis.createClient({
   url: `redis://${redisHost}:${redisPort}`
-});
+}); 
 
 redisClient.on('error', (err) => console.error('Redis Client Error', err));
 redisClient.on('connect', () => console.log('Connected to Redis'));
